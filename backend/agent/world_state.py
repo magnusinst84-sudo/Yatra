@@ -2,33 +2,31 @@ from __future__ import annotations
 import json
 import uuid
 from datetime import datetime, timezone
-import asyncio
 
-from google.genai import types
 from google.genai.errors import APIError as GeminiAPIError
 
-from backend.agent.gemini_client import get_gemini_client
+from backend.agent.gemini_client import MODEL_CHAIN, generate_with_fallback
 from backend.agent.prompts import SYSTEM_PROMPT, USER_TEMPLATE
 from backend.models import WorldState, Stop, AgentError, ValidationError
 
-MODEL = "gemini-3.1-flash-lite"
+# Compatibility alias for callers that inspect the primary model. Deriving it
+# from the fallback chain prevents the two primary-model declarations drifting.
+MODEL = MODEL_CHAIN[0]
 MIN_NARRATION_WORDS = 120
 MIN_STOPS = 3
 MAX_STOPS = 5
 MIN_FACTS = 3
 
-# Kept off 0.0: a deterministic retry re-runs the same failure mode instead
-# of giving you a genuinely different sample. All three attempts stay in a
-# range that still produces coherent JSON but varies enough to escape a
-# repeated undershoot.
+# Gemini 3.x guidance keeps sampling defaults; these values no longer control
+# temperature. Their length only preserves the outer validation retry count.
 RETRY_TEMPERATURES = [0.7, 0.85, 0.6]
 
 
 async def generate_world_state(place: str, era: str, rag_context: str, user_uid: str | None = None) -> WorldState:
     last_exc: Exception | None = None
-    for attempt, temperature in enumerate(RETRY_TEMPERATURES):
+    for attempt, _ in enumerate(RETRY_TEMPERATURES):
         try:
-            raw = await _call_model(place, era, rag_context, temperature)
+            raw = await _call_model(place, era, rag_context)
             return _parse_and_validate(raw, place, era, user_uid)
         except GeminiAPIError as e:
             last_exc = e
@@ -41,31 +39,13 @@ async def generate_world_state(place: str, era: str, rag_context: str, user_uid:
     raise AgentError(f"exhausted retries: {last_exc}")
 
 
-async def _call_model(place: str, era: str, rag_context: str, temperature: float) -> str:
-    client = get_gemini_client()
+async def _call_model(place: str, era: str, rag_context: str) -> str:
     prompt = USER_TEMPLATE.format(
         place=place, era=era,
         rag_context=rag_context or "(no context — proceed with uncertainty flag)",
     )
 
-    def _sync_call():
-        return client.models.generate_content(
-            model=MODEL,
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_PROMPT,
-                temperature=temperature,
-                response_mime_type="application/json",
-            ),
-        )
-
-    # generate_content is a blocking network call. Running it directly inside
-    # this coroutine would block the event loop and serialize every concurrent
-    # generate_world_state() call (e.g. asyncio.gather over multiple eras).
-    # to_thread moves the blocking call off the event loop so calls actually
-    # run concurrently.
-    response = await asyncio.to_thread(_sync_call)
-    return response.text
+    return await generate_with_fallback(prompt, SYSTEM_PROMPT)
 
 
 def _parse_and_validate(raw, place, era, user_uid):

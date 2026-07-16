@@ -24,6 +24,7 @@ Schema:
   ]
 }
 """
+
 USER_TEMPLATE = """Place: {place}
 Era: {era}
 
@@ -31,12 +32,3 @@ Retrieved context:
 {rag_context}
 
 Generate the walkthrough JSON now."""
-
-
-def build_messages(place, era, rag_context):
-    return [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": USER_TEMPLATE.format(
-            place=place, era=era,
-            rag_context=rag_context or "(no context — proceed with uncertainty flag)")},
-    ]

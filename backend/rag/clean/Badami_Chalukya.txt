@@ -1,0 +1,6 @@
+{
+  "political_security": "",
+  "economy_trade": "",
+  "architecture": "",
+  "daily_life_culture": "Badami is predominantly featured in the Tamil language historical fiction novel series Sivagamiyin Sapatham, written by Kalki Krishnamurthy. \nHindi Film Guru featuring Abisek Bachan was shot in Badami. \nA part of the Tamil film Taj Mahal was shot in Badami, with a part of the song 'Adi Manja Kilange' shot at Agastya Teertha."
+}

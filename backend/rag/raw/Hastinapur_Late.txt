@@ -1,0 +1,106 @@
+[
+  {
+    "title": "Hastinapur - Introduction",
+    "text": "Hastinapur (Hastināpur) is a city in the Meerut district in the Indian state of Uttar Pradesh. Hastinapura is described as the capital of the Kuru kingdom in Hindu texts such as the Mahabharata and the Puranas; it is also mentioned in ancient Jain texts. Hastinapur is located on the right bank of the Ganga river."
+  },
+  {
+    "title": "Hastinapur - Etymology",
+    "text": "In Sanskrit, Hastinapura translates to 'the City of Elephants' from Hastina (elephant) and pura (city). Its history dates back to the period of Mahabharata. It is said that the city was named after King Hasti.\nIt is also mentioned in the Ramayana, the 13th and 14th verses of which say (translated):\n\n \"Having crossed Ganga River at Hastinapura, they proceeded towards the west and, reaching Panchala kingdom through Kuru Jangala and observing well-filled lakes and rivers with clear water, the messengers mentioned above went briskly, due to the pressing nature of their mission.\""
+  },
+  {
+    "title": "Hastinapur - History",
+    "text": "Excavations at Hastinapur were carried out in the early 1950s by B. B. Lal, Director General of the Archaeological Survey of India. Although the main aim of this excavation, according to Lal himself, was to determine the stratigraphic position of Painted Grey Ware concerning other known ceramic industries of the early historical period, Lal found correlations between the text of the Mahabharata and the material remains that he unearthed at Hastinapur. This led him to historicize some of the traditions mentioned in the Mahabharata as well as link the appearance of the Painted Grey Ware with Aryans in the upper Ganges basin areas."
+  },
+  {
+    "title": "Hastinapur - Earliest period: to c. 500 BCE",
+    "text": "The original excavations in the 1950s suggested that the site of Hastinapur appears to have been abandoned and reoccupied several times; but subsequent excavation in 2021-22 suggested instead that the site had been continually occupied from antiquity until the late medieval period.\nAccording to Lal's report for the 1950s excavation, the first phase appears to have been before about 1200 BCE. Settlement seems to have been rather sporadic during this period, and no structures from this time have been found. The main find from this layer is some scattered fragments of Ochre Coloured Pottery, A distinct break between the first and second phases indicates that the site had been abandoned for some time before it was reoccupied.\nThe report for the 2020s excavation, on the other hand, described a bottom layer from approximately 1500-1000 BCE, with Painted Grey Ware pottery predominating, and structures with mud and mud brick walls.\nAccording to Lal, the site of Hastinapura was reoccupied from about 1100 BCE to about 800 BCE. This second layer, Period II, is characterised by Painted Grey Ware pottery, which is identified with the Vedic Period. No complete houses have been found from this phase, but some traces of walls were found, and they were made variously of mud, mud bricks, or reeds (Saccharum spontaneum, arranged horizontally and vertically) with mud plaster. The mud plaster was mixed with rice husks for reinforcement; this building technique is still used in modern times. Charred grains of rice have also been found in this layer, indicating that rice cultivation was practiced here during this period — one of the earliest archaeological attestations of rice cultivation in the Indian subcontinent. Copper appears to have been the main metal used during this period. No objects made of iron were found, although some lumps of iron ore and iron slag were found in the uppermost parts of this layer (that is, closer to the end of this period). Cattle bones, belonging to the zebu and the water buffalo, were found \"in very large numbers\" from this period, indicating that cattle-rearing played a key role in this society. The presence of \"definite cut-marks\" on cattle, sheep, and pig bones indicates that they were slaughtered for food, indicating that eating beef and pork was not frowned upon during this period.\nThe 2020s excavation report, on the other hand, reported a continuous occupation throughout this period, with a second phase lasting from about 1000 BCE to about 500 BCE and characterised by Northern Black Polished Ware along with other varieties."
+  },
+  {
+    "title": "Hastinapur - Portrayal in the Mahabharata",
+    "text": "In the Mahabharata, Hastinapur is portrayed as the capital of the Kuru kingdom of the Kauravas. Many incidents in the Mahabharata were set in the city of Hastinapur. According to the Mahabharata, the 100 Kaurava brothers were born in this city to their mother, Queen Gandhari, the wife of King Dhritarashtra. On the bank of the Budhi Ganga, two places near Hastinapur (Draupadi Ghat and Karna Ghat) reference Mahabharata personages.\n\nThe first reference to Hastinapur in the Puranas presents the city as the capital of Emperor Bharata's kingdom."
+  },
+  {
+    "title": "Hastinapur - Major flood c. 800 BCE and abandonment?",
+    "text": "Perhaps around 800 BCE, according to Lal, there seems to have been a major flood in the Ganga, which is suggested by a major \"erosional scar\" in the mound. The site seems to have been abandoned for a couple centuries. Notably, the Mahabharata mentions that, during the reign of the Kuru king Nichakshu, \"a great flood occurred in the Gangā which carried away a considerable portion of Hastināpura\", after which the capital was moved to Kaushambi. Because of the similarity to the apparent flood at Hastinapur, Lal suggested that this bit about the flood ravaging Hastinapura and the capital being moved to Kaushambi may have a historical basis.\nThe 2020s excavation report did not say anything about a flood either way."
+  },
+  {
+    "title": "Hastinapur - c. 500 BCE to c. 600s CE",
+    "text": "A third phase, according to the 1950s report, was from about the early 6th century BCE until about the early 3rd century BCE. During this phase, houses were made of mud bricks and baked bricks.  Northern Black Polished Ware characterises this period, and there is no Painted Grey Ware. A couple of burnt-brick drains, evidently meant for wastewater to flow out through, have also been found in this layer. This is when the first iron objects start to appear, as well as various copper and silver coins. The end of this period appears to have been around the early 3rd century BCE, when there seems to have been a fire that destroyed much of the town, as evidenced by burnt walls and floors and charcoal remains of reed matting that had been used for roofs.\nThe 2020s report instead listed a third phase lasting from about the 3rd to 2nd centuries BCE, corresponding roughly to the Maurya period. An inscription on a terracotta sling ball was found from this layer, which based on palaeography appears to be from roughly the 4th or 3rd centuries BCE. This report said nothing about a fire either way.\nAccording to Lal's report, after another apparent gap in occupation, the site was reoccupied in the early 2nd century BCE, remaining inhabited until the late 3rd century CE. Baked bricks were the predominant construction material used for houses during this period, for both walls and floors. There also seems to have been a fairly regular city planning along a grid during this phase. Among the sculptural highlights from this period is a terracotta figurine of Maitreya, the prophesied future Buddha, seated in the abhayamudrā pose with a kamaṇḍalu in his left hand. This sculpture, which was  discovered among the upper (i.e. later) part of this layer, bears stylistic similarities to sculptures from Mathura as well as Ahichchhatra, and may have been influenced by those art styles. A rotary quern found in the middle part of this layer is significant because it represents a technological innovation that was more efficient than the saddle quern that predominated in earlier protohistoric sites in the Indian subcontinent. Epigraphic and numismatic evidence from this layer helps determine its date. This includes two inscribed pots, identifying them as the property of individuals named Sadhujāta and Jayaśama respectively; a terracotta seal; and various coins, including some from the rulers of Mathura dated to the 2nd century BCE, some from the Yaudheyas right around the BCE/CE cutoff, and some \"imitating those of\" the Kushan king Vāsudeva I around the mid-3rd century CE.\nThe 2020s report by Garnayak listed a fourth phase from approximately the 2nd century BCE to the 2nd century CE, roughly corresponding to the Shunga and Kushan periods. Among the findings from this phase were several terracotta seals, with one dated palaeographically to the 1st or 2nd century BCE and others dated to the Kushan period. Coins of the Indo-Greek king Menander I were also found from this period.\nThe original 1950s excavations suggested that, after about the 3rd century CE, the site appears to have been abandoned for a long time before being reoccupied in about the late 11th century CE. However, the more recent investigations indicate that Hastinapur was definitely occupied during this period; in particular, a terracotta seal of the Gupta king Vishnugupta, along with various Gupta coins, provide evidence of occupation during the Gupta period. The 2020s report suggested a fifth phase corresponding with the Gupta and Later Gupta periods, spanning roughly the 3rd through 7th centuries.\nThe period from roughly the Shunga to Gupta dynasties (c. 2nd century BCE to c. 6th century CE) appears to have been Hastinapur's heyday. Archaeological finds of ceramic roof tiles  and textile-making tools peak during this period, for example, and the various coins and seals found here indicate that Hastinapur was a significant administrative and commercial centre that was connected to major trade routes (such as, perhaps, the Uttarapatha that traversed northern India)."
+  },
+  {
+    "title": "Hastinapur - Medieval period",
+    "text": "The 2020s excavation also reported a sixth layer, from roughly the 8th through 11th centuries. Structures from this period appear to be similar to those of the Gupta period.\nThe 2020s report by Garnayak indicated a seventh and final phase lasting from roughly the 1100s to the 1500s, with structures reusing bricks from earlier periods. After this period, the site was abandoned, or perhaps simply shifted away from the area that was excavated. This may have been due to a flood or a shift in the Ganga's course.\nThe pottery of Lal's Period V is completely different from Period IV, and the structures appear to have extensively reused bricks from Period III and IV structures as spolia. A single coin from the reign of Balban (r. 1266–1287) helps fix the date of this layer. A sandstone sculpture of Rishabhadeva, the first Jain tīrthankara, seated in the dhyānamudrā pose and perhaps dating from the 14th century, is significant as providing evidence of Hastinapur's earlier importance to Jains, since it is an important Jain pilgrimage destination today."
+  },
+  {
+    "title": "Hastinapur - Mughal period",
+    "text": "Hastinapur is listed in the Ain-i-Akbari as a pargana under Delhi sarkar, producing a revenue of 4,466,904 dams for the imperial treasury and supplying a force of 300 infantry and 10 cavalry. The author Abu'l-Fazl ibn Mubarak describes it \"an ancient Hindu settlement\" lying on the Ganges."
+  },
+  {
+    "title": "Hastinapur - British Raj",
+    "text": "In British India, Hastinapur was ruled by Raja Nain Singh Nagar, who built many Hindu temples in and around Hastinapura."
+  },
+  {
+    "title": "Hastinapur - Geography and climate",
+    "text": "Present-day Hastinapur is a town in the Doab region of Uttar Pradesh in India, about 37 kilometres (23 mi) from Meerut and nearly 96 km (60 mi) north-east of Delhi on National Highway 34. It is a small township re-established by Jawaharlal Nehru on 6 February 1949, located at 29.17°N 78.02°E﻿ / 29.17; 78.02. With an average elevation of 218 metres (715 ft), Hastinapur experiences temperatures ranging from 5 to 40 °C (41 to 104 °F). Summer season is from March to May, during which the temperatures range from 32 to 40 °C (90 to 104 °F). The monsoon season is from July to September, during which the temperature is relatively low. Winter lasts from December to February, with December usually being the coldest month of the year. During this time, temperatures can drop to around 5 °C (41 °F) and don't usually go above 14 °C (57 °F)."
+  },
+  {
+    "title": "Hastinapur - Demographics",
+    "text": "According to the 2011 Census of India, Hastinapur Nagar Panchayat had a population of 26,452, of which 14,010 are males while 12,442 are females. The literacy rate of the town was 74.5% slightly higher than the national average of 74%. Around 14% of the population was under 6 years of age."
+  },
+  {
+    "title": "Hastinapur - Places of interest",
+    "text": "Located on the banks of an old ravine of the Ganges, Hastinapur is considered one of the holiest places for Hindus and Jains. It is believed to be the birthplace of three Jain Tirthankaras. There are many ancient Hindu temples including Pandeshwar Temple and Karna Temple, as well as Jain temples such as Shri Digamber, Jain Mandir, Jambudweep, Kailash Parvat, and Shwetambar Jain Temple."
+  },
+  {
+    "title": "Hastinapur - Digamber Jain Bada Mandir Hastinapur",
+    "text": "Digamber Jain Bada Mandir Hastinapur is one of the oldest Jain temples in Hastinapur. The main temple is believed to have been built in 1801 under the aegis of Raja Harsukh Rai, who was the imperial treasurer of Emperor Shah Alam II. The temple has many other facilities, including, police station, Digamber Jain Gurukul, and a Udaseen Ashram. Several tourist attractions including Jal Mandir, Jain Library, Acharya Vidyanand Museum, 24 Tonks, and the ancient Nishiyajis are situated few kilometres from the main temple."
+  },
+  {
+    "title": "Hastinapur - Shri Shwetambar Jain Ashtapad Teerth",
+    "text": "Shri Ashtapad Teerth was built under the aegis of Shri Hastinapur Jain Shwetambar Teerth Trust. It is a 46-metre-high (151 ft) structure dedicated to first tirthankara Rishabhnath."
+  },
+  {
+    "title": "Hastinapur - Kailash Parvat Rachna",
+    "text": "Kailash Parvat is a 40-metre-high (131 ft) structure, constructed under the aegis of Shri Digamber Jain Mandir, Hastinapur. The Kailash Parvat premises are home to several Jain temples, including Yatri Niwas and Bhojanshala. Kailash Parvat also has an auditorium and a helipad on the premises."
+  },
+  {
+    "title": "Hastinapur - Jambudweep Jain Tirth",
+    "text": "Jambudweep, depicting a model of Jain cosmology, was designed here under the supervision of Shri Gyanmati Mataji in 1985."
+  },
+  {
+    "title": "Hastinapur - Pandeshwar Temple",
+    "text": "Situated in the historic location of the ancient city of Hastinapur, the Pandeshwar temple is dedicated to Shiva. This temple is believed to be the place where Kauravas and Pandavas received their education in Vedas and Puranas. A temple of the Hindu goddess Kali and many Hindu ashramas are also present on a hillock between the ruins. Legend has it that in the Mahabharata period, Pandu's eldest son Yudhishthira had established the shivalinga at the Pandeshwar Mahadev temple before the war of Mahabharata and prayed to Shiva for a blessing of winning the war."
+  },
+  {
+    "title": "Hastinapur - Karna Temple",
+    "text": "The Karna Temple is located near the Pandeshwar temple on an old ravine along the bank of the Ganges. The Shivling inside the Karna Temple is believed to be established by Karna, one of the prominent figures in the Mahabharata."
+  },
+  {
+    "title": "Hastinapur - Bhai Dharam Singh Gurdwara",
+    "text": "This is a small Gurdwara located in the village of Saifpur, around 2.5 km (1.6 mi) from Hastinapur."
+  },
+  {
+    "title": "Hastinapur - Hastinapur Sanctuary",
+    "text": "Hastinapur Sanctuary, established in 1986, is one of the prominent wildlife projects in India. The sanctuary extends over a wide area, encompassing the districts of Meerut, Ghaziabad, Gautam Budh Nagar, Bijnor, Hapur, and Jyotiba Phule Nagar in Uttar Pradesh. It is a sprawling forest, occupying an area of nearly 2,073 square kilometres (800 sq mi)."
+  },
+  {
+    "title": "Hastinapur - Vidhur Ka Tila",
+    "text": "Vidur ka Tila is an archaeological mound in Hastinapur associated with Vidura, a prominent figure in the Mahabharata tradition. The site is marked by a pillar and is visited by pilgrims. It overlooks the Ganges Canal and is included among the notable heritage and religious sites of Hastinapur."
+  },
+  {
+    "title": "Hastinapur - Festivals and fairs",
+    "text": "Various cultural events and religious celebrations are held in Hastinapur annually, including Akshaya Tritiya, Das Lakshana, Kartik Mela, Holi Mela, and Durga Puja. These festivals, among others, are organized by non-government organizations (NGOs) and the State Tourism Department."
+  },
+  {
+    "title": "Hastinapur - See also",
+    "text": "Indraprastha\nMahabharata\nDigamber Jain Bada Mandir Hastinapur\nJambudweep\nHistoricity of the Mahabharata"
+  },
+  {
+    "title": "Hastinapur - Further reading",
+    "text": "B.B. Lal (1952). New Light on the \"dark Age\" of Indian History: Recent Excavations at the Hastinapura Site, Near Delhi. Illustrated London news.\nBraj Basi Lal (1955). Excavations at Hastinapura and Other Explorations [in the Upper Gangā and Sutlej Basins], 1950-52."
+  },
+  {
+    "title": "Hastinapur - External links",
+    "text": "Media related to Hastinapur at Wikimedia Commons"
+  }
+]

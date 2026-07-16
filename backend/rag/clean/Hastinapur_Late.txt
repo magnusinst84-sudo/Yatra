@@ -1,0 +1,6 @@
+{
+  "political_security": "Situated in the historic location of the ancient city of Hastinapur, the Pandeshwar temple is dedicated to Shiva. This temple is believed to be the place where Kauravas and Pandavas received their education in Vedas and Puranas. A temple of the Hindu goddess Kali and many Hindu ashramas are also present on a hillock between the ruins. Legend has it that in the Mahabharata period, Pandu's eldest son Yudhishthira had established the shivalinga at the Pandeshwar Mahadev temple before the war of Mahabharata and prayed to Shiva for a blessing of winning the war.\n\nThis is a small Gurdwara located in the village of Saifpur, around 2.5 km (1.6 mi) from Hastinapur.",
+  "economy_trade": "",
+  "architecture": "The Karna Temple is located near the Pandeshwar temple on an old ravine along the bank of the Ganges. The Shivling inside the Karna Temple is believed to be established by Karna, one of the prominent figures in the Mahabharata.",
+  "daily_life_culture": ""
+}

@@ -2,3 +2,6 @@ wikipedia-api
 nltk
 google-genai
 chromadb
+firebase-admin
+fastapi
+uvicorn

@@ -8,3 +8,10 @@ __pycache__/
 .env
 .env.local
 .env.*.local
+
+# Local Databases
+chroma_db/
+
+# Temp Images
+*.jpg
+*.png

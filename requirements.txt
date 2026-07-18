@@ -4,4 +4,8 @@ google-genai
 chromadb
 firebase-admin
 fastapi
-uvicorn
+uvicorn[standard]
+motor
+python-dotenv
+pydantic
+httpx

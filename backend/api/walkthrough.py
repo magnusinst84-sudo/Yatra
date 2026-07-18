@@ -14,6 +14,11 @@ B1 Persistence & Image-Gen routes:
   POST /api/walkthrough/{id}/share  — Generate a public share slug.
   GET  /api/walkthrough/shared/{slug} — Public retrieval by slug.
   GET  /api/walkthrough/{id}/stop/{n} — Polling endpoint for stop image status.
+POST /api/walkthrough   — Generate a historical walkthrough for a place + era.
+GET  /api/walkthrough/places — List all supported place + era combinations.
+
+The RAG pipeline (retrieval.py) is called synchronously inside a thread pool
+so it does not block the async event loop.
 """
 
 from __future__ import annotations
@@ -66,6 +71,7 @@ class PlaceOption(BaseModel):
 
 # ---------------------------------------------------------------------------
 # Teammate routes (RAG-wired, direct response, no DB)
+# Routes
 # ---------------------------------------------------------------------------
 
 @router.get("/walkthrough/places", response_model=list[PlaceOption])
@@ -81,6 +87,11 @@ async def create_walkthrough(req: WalkthroughRequest) -> WorldState:
     1. retrieve(place, era)  — dict lookup or Chroma vector search
     2. generate_world_state  — Gemini generates 3-5 stop walkthrough
     """
+    Full RAG + generation pipeline:
+    1. retrieve(place, era)  — dict lookup or Chroma vector search
+    2. generate_world_state  — Gemini generates 3-5 stop walkthrough
+    """
+    # Validate place+era against the known list
     known = {(p["place"], p["era"]) for p in PLACES}
     if (req.place, req.era) not in known:
         raise HTTPException(
@@ -93,6 +104,10 @@ async def create_walkthrough(req: WalkthroughRequest) -> WorldState:
 
     rag_context: str = await asyncio.to_thread(retrieve, req.place, req.era)
 
+    # RAG retrieval (sync I/O — run in thread pool)
+    rag_context: str = await asyncio.to_thread(retrieve, req.place, req.era)
+
+    # Generation
     try:
         world_state = await generate_world_state(
             place=req.place,

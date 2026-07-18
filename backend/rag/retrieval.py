@@ -106,8 +106,20 @@ def retrieve(place: str, era: str) -> str:
             query_embeddings=[vector],
             n_results=1,
         )
+        distances = results.get("distances", [[]])[0]
         docs = results.get("documents", [[]])[0]
-        return docs[0] if docs else ""
+
+        # Cosine distance threshold check:
+        # Distance <= 0.70 means a strong match (e.g. typos, partial inputs).
+        # Distance > 0.70 means it is an unrelated/random query, which we reject.
+        if distances and distances[0] <= 0.70:
+            return docs[0] if docs else ""
+        
+        logger.warning(
+            "RAG fallback distance too high (%s > 0.70) for place=%r era=%r. Returning empty.",
+            distances[0] if distances else "None", place, era
+        )
+        return ""
 
     except Exception as exc:  # noqa: BLE001
         logger.error("RAG retrieval failed for place=%r era=%r: %s", place, era, exc)

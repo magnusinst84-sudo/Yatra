@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Home from './pages/Home.jsx';
 import History from './pages/History.jsx';
+import { logoutUser } from './services/firebase';
 
-export default function App() {
+export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState('home');
 
   return (
     <div className="min-h-screen bg-darkBg text-white relative flex flex-col">
       {/* Premium Navbar */}
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={logoutUser} />
 
       {/* Main Pages with Fade In / Slide Up page transitions */}
       <main className="flex-grow flex flex-col">

@@ -16,15 +16,15 @@ import {
 // ── helpers ──────────────────────────────────────────────────────────────────
 const friendlyError = (code: string): string => {
   switch (code) {
-    case 'auth/email-already-in-use':    return 'This email is already registered. Try logging in.';
-    case 'auth/invalid-email':           return 'Please enter a valid email address.';
-    case 'auth/weak-password':           return 'Password must be at least 6 characters.';
-    case 'auth/user-not-found':          return 'No account found with this email.';
-    case 'auth/wrong-password':          return 'Incorrect password. Try again.';
-    case 'auth/invalid-credential':      return 'Invalid email or password.';
-    case 'auth/too-many-requests':       return 'Too many attempts. Please wait and try again.';
-    case 'auth/network-request-failed':  return 'Network error. Check your connection.';
-    default:                             return 'Something went wrong. Please try again.';
+    case 'auth/email-already-in-use': return 'This email is already registered. Try logging in.';
+    case 'auth/invalid-email': return 'Please enter a valid email address.';
+    case 'auth/weak-password': return 'Password must be at least 6 characters.';
+    case 'auth/user-not-found': return 'No account found with this email.';
+    case 'auth/wrong-password': return 'Incorrect password. Try again.';
+    case 'auth/invalid-credential': return 'Invalid email or password.';
+    case 'auth/too-many-requests': return 'Too many attempts. Please wait and try again.';
+    case 'auth/network-request-failed': return 'Network error. Check your connection.';
+    default: return 'Something went wrong. Please try again.';
   }
 };
 // ─────────────────────────────────────────────────────────────────────────────
@@ -33,28 +33,28 @@ export const AuthForm = () => {
   const [activeTab, setActiveTab] = useState<'signup' | 'login'>('signup');
 
   // Sign Up fields
-  const [firstName,       setFirstName]       = useState('');
-  const [lastName,        setLastName]         = useState('');
-  const [signupEmail,     setSignupEmail]      = useState('');
-  const [signupPassword,  setSignupPassword]   = useState('');
-  const [confirmPassword, setConfirmPassword]  = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   // Log In fields
-  const [loginEmail,    setLoginEmail]    = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
   // UI state
-  const [loading,       setLoading]       = useState(false);
-  const [error,         setError]         = useState('');
-  const [resetSent,     setResetSent]     = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [resetSent, setResetSent] = useState(false);
 
   // ── Animation variants ────────────────────────────────────────────────────
   const formContainerVariants = {
-    hidden:  { opacity: 0 },
+    hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
   };
   const formItemVariants = {
-    hidden:  { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 18 },
     visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 120, damping: 16 } },
   };
   // ─────────────────────────────────────────────────────────────────────────
@@ -215,11 +215,10 @@ export const AuthForm = () => {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className={`text-left px-4 py-3 rounded-xl text-xs font-sans tracking-wide border ${
-              resetSent
+            className={`text-left px-4 py-3 rounded-xl text-xs font-sans tracking-wide border ${resetSent
                 ? 'bg-green-900/30 border-green-500/30 text-green-300'
                 : 'bg-red-900/30 border-red-500/30 text-red-300'
-            }`}
+              }`}
           >
             {resetSent
               ? `Password reset email sent to ${loginEmail}. Check your inbox.`
@@ -250,7 +249,7 @@ export const AuthForm = () => {
                     label="First Name"
                     type="text"
                     id="firstName"
-                    placeholder="Tanmay"
+                    placeholder="Saksham"
                     icon={<User className="w-4 h-4" />}
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -260,7 +259,7 @@ export const AuthForm = () => {
                     label="Last Name"
                     type="text"
                     id="lastName"
-                    placeholder="Nair"
+                    placeholder="Mittal"
                     icon={<User className="w-4 h-4" />}
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -273,7 +272,7 @@ export const AuthForm = () => {
                     label="Email"
                     type="email"
                     id="signupEmail"
-                    placeholder="you@example.com"
+                    placeholder="you@gmail.com"
                     icon={<Mail className="w-4 h-4" />}
                     value={signupEmail}
                     onChange={(e) => setSignupEmail(e.target.value)}
@@ -314,7 +313,7 @@ export const AuthForm = () => {
                     label="Email"
                     type="email"
                     id="loginEmail"
-                    placeholder="you@example.com"
+                    placeholder="you@gmail.com"
                     icon={<Mail className="w-4 h-4" />}
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}

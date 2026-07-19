@@ -6,7 +6,7 @@ Hard rules:
 - 3 to 5 stops.
 - Each stop's narration_script: second person, minimum 120 words, must reference
   the specific place and era by name at least once.
-- Each stop's daily_life_facts: at least 3 entries, grounded in retrieved context.
+- Each stop's daily_life_facts: at least 3 entries, grounded in retrieved context. These MUST be highly specific to the exact location of this stop (e.g. architectural materials of this exact building, specific trade goods sold at this exact market), avoiding generic random trivia.
 - Each stop's image_prompt: environment/architecture-focused, not people-focused.
 - For every stop after the first, image_prompt must explicitly reference the
   previous stop's vantage point (e.g. "Continuing from the harbor gate...").

@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../App';
+import { startWalkthrough } from '../services/api';
+import WalkthroughModal from '../components/WalkthroughModal';
 
 // Predefined destination data to feed the state
 const INITIAL_DESTINATIONS = [
@@ -61,9 +64,15 @@ const getTitleFontSize = (name) => {
 };
 
 export default function Home() {
+  const { idToken } = useContext(AuthContext);
   const [destinations, setDestinations] = useState(INITIAL_DESTINATIONS);
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchPlace, setSearchPlace] = useState('');
+
+  // Walkthrough state
+  const [walkthrough, setWalkthrough]   = useState(null);
+  const [isLoading, setIsLoading]       = useState(false);
+  const [searchError, setSearchError]   = useState(null);
 
   // Local display states synced with fade transition
   const [displayEra, setDisplayEra] = useState(INITIAL_DESTINATIONS[0].era);
@@ -92,13 +101,23 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [activeIndex, destinations]);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    // Frontend only search simulation
-    alert(`Searching historical timeline for: "${searchPlace}" in the "${selectedEra}" era...`);
+    if (!searchPlace.trim()) return;
+    setSearchError(null);
+    setIsLoading(true);
+    try {
+      const result = await startWalkthrough(searchPlace.trim(), selectedEra, idToken);
+      setWalkthrough(result);
+    } catch (err) {
+      setSearchError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
+    <>
     <div className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden cinema-grid select-text">
 
       {/* ========================================== */}
@@ -331,5 +350,35 @@ export default function Home() {
       </div>
 
     </div>
+
+    {/* ── Loading Overlay ── */}
+    {isLoading && (
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in">
+        <div className="glass-panel rounded-xl px-10 py-8 flex flex-col items-center gap-5 border border-antiqueGold/20 shadow-2xl">
+          <div className="w-10 h-10 border-2 border-antiqueGold border-t-transparent rounded-full animate-spin" />
+          <p className="font-body text-sm tracking-[0.2em] text-antiqueGold uppercase">Generating Walkthrough…</p>
+          <p className="font-body text-xs text-lightGray/60">Consulting historical archives for <span className="text-white">{searchPlace}</span></p>
+        </div>
+      </div>
+    )}
+
+    {/* ── Error Toast ── */}
+    {searchError && (
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
+        <div className="glass-panel rounded-lg px-6 py-3 border border-red-500/30 flex items-center gap-4 shadow-xl">
+          <span className="text-red-400 text-sm font-body">{searchError}</span>
+          <button onClick={() => setSearchError(null)} className="text-lightGray hover:text-white text-xs">✕</button>
+        </div>
+      </div>
+    )}
+
+    {/* ── Walkthrough Modal ── */}
+    {walkthrough && (
+      <WalkthroughModal
+        walkthrough={walkthrough}
+        onClose={() => setWalkthrough(null)}
+      />
+    )}
+  </>
   );
 }

@@ -33,10 +33,6 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-from backend.api.walkthrough import router as walkthrough_router
-
-app = FastAPI(title="Yatra API", version="0.1.0")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],   # tighten before production
@@ -55,4 +51,3 @@ app.include_router(walkthrough_router, prefix="/api")
 async def health() -> dict:
     """Simple health check endpoint."""
     return {"status": "ok", "message": "Yatra backend is running!"}
-    return {"status": "ok"}

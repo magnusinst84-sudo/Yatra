@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pydantic
+motor
+google-genai
+httpx
+chromadb
+firebase-admin

@@ -106,6 +106,7 @@ def retrieve(place: str, era: str) -> str:
             query_embeddings=[vector],
             n_results=1,
         )
+        distances = results.get("distances", [[]])[0]
         docs = results.get("documents", [[]])[0]
         distances = results.get("distances", [[]])[0]
         

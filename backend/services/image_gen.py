@@ -40,7 +40,7 @@ async def generate_image_with_fallback(prompt: str) -> str | None:
     Tier 1: imagen-4.0-fast-generate-001   (generate_images)
     Tier 2: imagen-4.0-generate-001        (generate_images)
     Tier 3: imagen-4.0-ultra-generate-001  (generate_images)
-    Tier 4: gemini-2.0-flash-preview-image-generation (generate_content)
+    Tier 4: free fallback via Pollinations.ai
 
     Returns None if all tiers fail.
     """

@@ -45,9 +45,18 @@ async def get_walkthrough_by_slug(slug: str) -> dict:
     return result
 
 async def list_walkthroughs_for_user(user_uid: str) -> list:
-    """List all walkthroughs saved by a specific user."""
+    """List summary cards for all walkthroughs saved by a specific user.
+
+    Uses a $slice projection to fetch only the first stop so the route handler
+    can extract its image_url as a thumbnail without loading the full base64
+    payload for every stop.
+    """
     db = get_db()
-    cursor = db.walkthroughs.find({"user_uid": user_uid}).sort("created_at", -1)
+    # Fetch only the first stop element — enough for thumbnail extraction
+    cursor = db.walkthroughs.find(
+        {"user_uid": user_uid},
+        {"stops": {"$slice": 1}},
+    ).sort("created_at", -1)
     results = []
     async for document in cursor:
         document.pop("_id", None)

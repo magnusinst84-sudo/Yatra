@@ -87,10 +87,6 @@ async def create_walkthrough(req: WalkthroughRequest) -> WorldState:
     1. retrieve(place, era)  — dict lookup or Chroma vector search
     2. generate_world_state  — Gemini generates 3-5 stop walkthrough
     """
-    Full RAG + generation pipeline:
-    1. retrieve(place, era)  — dict lookup or Chroma vector search
-    2. generate_world_state  — Gemini generates 3-5 stop walkthrough
-    """
     # Validate place+era against the known list
     known = {(p["place"], p["era"]) for p in PLACES}
     if (req.place, req.era) not in known:
@@ -101,8 +97,6 @@ async def create_walkthrough(req: WalkthroughRequest) -> WorldState:
                 "Call GET /api/walkthrough/places to see valid options."
             ),
         )
-
-    rag_context: str = await asyncio.to_thread(retrieve, req.place, req.era)
 
     # RAG retrieval (sync I/O — run in thread pool)
     rag_context: str = await asyncio.to_thread(retrieve, req.place, req.era)
@@ -183,21 +177,56 @@ async def start_walkthrough(req: StartRequest):
 
 @router.get("/walkthrough/mine")
 async def get_my_walkthroughs(user=Depends(get_current_user)):
-    """Fetch all walkthroughs saved by the current authenticated user."""
-    return await list_walkthroughs_for_user(user["uid"])
+    """
+    Fetch a lightweight list of walkthroughs for the authenticated user.
+    Returns only walkthrough_id, place, era, created_at, and the first stop's
+    image_url as a thumbnail — no full stops array or base64 payloads.
+    """
+    db = get_db_safe()
+    projection = {
+        "_id": 0,
+        "walkthrough_id": 1,
+        "place": 1,
+        "era": 1,
+        "created_at": 1,
+        # Fetch only the first stop's image_url for use as a list thumbnail
+        "stops": {"$slice": 1},
+    }
+    cursor = db.walkthroughs.find(
+        {"user_uid": user["uid"]},
+        projection,
+    ).sort("created_at", -1)
+
+    results = []
+    async for doc in cursor:
+        # Flatten the thumbnail out of the stops array so the client gets a
+        # simple `thumbnail_url` field rather than a partial stops list.
+        stops = doc.pop("stops", [])
+        doc["thumbnail_url"] = (stops[0].get("image_url") if stops else None)
+        results.append(doc)
+    return results
 
 
 @router.post("/walkthrough/{walkthrough_id}/save")
 async def save_user_walkthrough(walkthrough_id: str, user=Depends(get_current_user)):
-    """Claim a system-generated walkthrough to the authenticated user's account."""
+    """Claim a copy of a system-generated walkthrough to the authenticated user's account."""
     db_instance = get_db_safe()
-    result = await db_instance.walkthroughs.update_one(
-        {"walkthrough_id": walkthrough_id},
-        {"$set": {"user_uid": user["uid"]}},
-    )
-    if result.matched_count == 0:
+    wt = await db_instance.walkthroughs.find_one({"walkthrough_id": walkthrough_id})
+    if not wt:
         raise HTTPException(status_code=404, detail="Walkthrough not found")
-    return {"status": "saved", "walkthrough_id": walkthrough_id}
+
+    import uuid
+    # Clone the document for the user so the original stays in the global cache pool
+    wt.pop("_id", None)
+    new_walkthrough_id = str(uuid.uuid4())
+    wt["walkthrough_id"] = new_walkthrough_id
+    wt["user_uid"] = user["uid"]
+    # Clear any share_slug so the clone doesn't inherit a public link
+    wt.pop("share_slug", None) 
+    
+    await db_instance.walkthroughs.insert_one(wt)
+
+    return {"status": "saved", "walkthrough_id": new_walkthrough_id}
 
 
 @router.post("/walkthrough/{walkthrough_id}/share")
@@ -211,9 +240,20 @@ async def share_walkthrough(walkthrough_id: str, user=Depends(get_current_user))
         raise HTTPException(status_code=403, detail="Not authorized to share this walkthrough")
 
     if not wt.get("share_slug"):
-        slug = generate_share_slug()
-        await update_share_slug(walkthrough_id, slug)
-        wt["share_slug"] = slug
+        retries = 0
+        while retries < 5:
+            slug = generate_share_slug()
+            try:
+                await update_share_slug(walkthrough_id, slug)
+                wt["share_slug"] = slug
+                break
+            except Exception as e:
+                if "DuplicateKeyError" in str(e) or "DuplicateKeyError" in type(e).__name__:
+                    retries += 1
+                    continue
+                raise
+        else:
+            raise HTTPException(status_code=500, detail="Failed to generate a unique share slug.")
 
     return {"share_slug": wt["share_slug"]}
 
@@ -224,6 +264,20 @@ async def get_shared_walkthrough(slug: str):
     wt = await get_walkthrough_by_slug(slug)
     if not wt:
         raise HTTPException(status_code=404, detail="Shared walkthrough not found")
+    return wt
+
+
+@router.get("/walkthrough/{walkthrough_id}")
+async def get_walkthrough(walkthrough_id: str):
+    """
+    Return the full walkthrough document (all stops, narration, image data)
+    for a given walkthrough_id. No authentication required — matches the
+    access pattern of /walkthrough/shared/{slug}.
+    Returns 404 if the ID is not found.
+    """
+    wt = await get_walkthrough_by_id(walkthrough_id)
+    if not wt:
+        raise HTTPException(status_code=404, detail="Walkthrough not found")
     return wt
 
 

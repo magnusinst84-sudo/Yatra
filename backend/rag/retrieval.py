@@ -107,6 +107,12 @@ def retrieve(place: str, era: str) -> str:
             n_results=1,
         )
         docs = results.get("documents", [[]])[0]
+        distances = results.get("distances", [[]])[0]
+        
+        # If the distance is too large, it's not a genuine match.
+        if distances and distances[0] > 0.5:
+            return ""
+            
         return docs[0] if docs else ""
 
     except Exception as exc:  # noqa: BLE001

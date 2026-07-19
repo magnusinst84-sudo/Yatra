@@ -2,7 +2,9 @@ import { useState, useEffect, createContext } from 'react';
 import type { User } from 'firebase/auth';
 import { LandingPage } from './landing/components/LandingPage';
 import Dashboard from './Dashboard';
+import WalkthroughModal from './components/WalkthroughModal';
 import { auth } from './services/firebase';
+import { getSharedWalkthrough } from './services/api';
 import './landing/index.css';
 import './index.css';
 
@@ -21,9 +23,20 @@ export const AuthContext = createContext<AuthContextType>({
 function App() {
   const [user, setUser]       = useState<User | null>(null);
   const [idToken, setIdToken] = useState<string | null>(null);
+  const [sharedWalkthrough, setSharedWalkthrough] = useState<any>(null);
 
   useEffect(() => {
-    // auth is null when VITE_FIREBASE_* vars are missing — stay on landing page
+    // Check for shared link in URL (e.g., /shared/aB3x9Q21)
+    const path = window.location.pathname;
+    if (path.startsWith('/shared/')) {
+      const slug = path.split('/')[2];
+      if (slug) {
+        getSharedWalkthrough(slug)
+          .then(setSharedWalkthrough)
+          .catch(err => console.error('Shared link failed:', err));
+      }
+    }
+
     if (!auth) return;
 
     const unsub = auth.onAuthStateChanged(async (firebaseUser) => {
@@ -39,10 +52,23 @@ function App() {
     return () => unsub();
   }, []);
 
+  const handleCloseShared = () => {
+    setSharedWalkthrough(null);
+    window.history.replaceState({}, '', '/');
+  };
+
   return (
     <AuthContext.Provider value={{ user, idToken }}>
-      <div className="w-full min-h-screen landing-wrapper">
+      <div className="w-full min-h-screen landing-wrapper relative">
         {user ? <Dashboard /> : <LandingPage />}
+        
+        {/* Render shared walkthrough directly on top if opened via link */}
+        {sharedWalkthrough && (
+           <WalkthroughModal 
+              walkthrough={sharedWalkthrough} 
+              onClose={handleCloseShared} 
+           />
+        )}
       </div>
     </AuthContext.Provider>
   );

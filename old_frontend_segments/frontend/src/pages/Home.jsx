@@ -239,8 +239,8 @@ export default function Home() {
                   key={dest.id}
                   onClick={() => setActiveIndex(idx)}
                   className={`group relative rounded-lg cursor-pointer p-4 transition-all duration-500 flex items-center justify-between overflow-hidden border ${isActive
-                      ? 'glass-card border-antiqueGold shadow-[0_0_20px_rgba(212,175,55,0.15)] translate-x-1'
-                      : 'bg-white/[0.02] border-white/5 hover:border-white/20 hover:bg-white/[0.04]'
+                    ? 'glass-card border-antiqueGold shadow-[0_0_20px_rgba(212,175,55,0.15)] translate-x-1'
+                    : 'bg-white/[0.02] border-white/5 hover:border-white/20 hover:bg-white/[0.04]'
                     }`}
                 >
                   {/* Subtle active state golden glow side bar */}
@@ -297,8 +297,6 @@ export default function Home() {
         {/* Left Side: Page counter / coordinates detail */}
         <div className="hidden md:flex items-center gap-6 font-body text-[10px] tracking-[0.25em] text-lightGray/80">
           <span>YATRA SYSTEM v1.0.4</span>
-          <span className="w-1.5 h-1.5 bg-antiqueGold/60 rounded-full animate-pulse-subtle"></span>
-          <span>LAT: 41.9028° N &nbsp; LON: 12.4964° E</span>
         </div>
 
         {/* Right Side: Large Navigation Arrows (Animation only) */}

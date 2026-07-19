@@ -1,73 +1,61 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
-// Vite exposes env variables through import.meta.env
-// We first try to parse the VITE_FIREBASE_CONFIG as JSON.
-// If it fails or isn't set, we fall back to manual object parsing or throw an error.
+// Each Firebase field is its own VITE_ env var — paste the values directly from
+// Firebase Console → Project Settings → Your Apps → Web app → firebaseConfig.
+//
+// frontend/.env should look like:
+//   VITE_FIREBASE_API_KEY=AIzaSy...
+//   VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+//   VITE_FIREBASE_PROJECT_ID=your-project
+//   VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+//   VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+//   VITE_FIREBASE_APP_ID=1:123456789:web:abc123
 
-let firebaseConfig = {};
-const configString = import.meta.env.VITE_FIREBASE_CONFIG;
+const firebaseConfig = {
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+};
 
-if (configString) {
-  try {
-    // If properly formatted JSON in .env:
-    firebaseConfig = JSON.parse(configString);
-  } catch (e) {
-    console.warn("VITE_FIREBASE_CONFIG could not be parsed as JSON. It may be improperly formatted in .env.");
-    
-    // Quick fallback to try and extract values if it's a JS object string (like in .env currently)
-    // Note: It's heavily recommended to store valid JSON in the .env file!
-    try {
-      const extract = (key) => {
-        const match = configString.match(new RegExp(`${key}:\\s*"([^"]+)"`));
-        return match ? match[1] : undefined;
-      };
-      
-      firebaseConfig = {
-        apiKey: extract("apiKey"),
-        authDomain: extract("authDomain"),
-        projectId: extract("projectId"),
-        storageBucket: extract("storageBucket"),
-        messagingSenderId: extract("messagingSenderId"),
-        appId: extract("appId")
-      };
-      console.log("Successfully extracted Firebase config manually.");
-    } catch (err) {
-      console.error("Failed to extract Firebase config.", err);
-    }
-  }
-} else {
-  console.warn("VITE_FIREBASE_CONFIG environment variable is not set.");
+// Only initialize if the API key is present
+const hasConfig = !!firebaseConfig.apiKey;
+
+if (!hasConfig) {
+  console.warn(
+    '[YATRA] Firebase is not configured.\n' +
+    'Add the following to frontend/.env and restart the dev server:\n' +
+    '  VITE_FIREBASE_API_KEY=...\n' +
+    '  VITE_FIREBASE_AUTH_DOMAIN=...\n' +
+    '  VITE_FIREBASE_PROJECT_ID=...\n' +
+    '  VITE_FIREBASE_STORAGE_BUCKET=...\n' +
+    '  VITE_FIREBASE_MESSAGING_SENDER_ID=...\n' +
+    '  VITE_FIREBASE_APP_ID=...'
+  );
 }
 
-// Initialize Firebase App
-const app = initializeApp(firebaseConfig);
-
-// Export Auth instance and Provider
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+const app             = hasConfig ? initializeApp(firebaseConfig) : null;
+export const auth     = hasConfig ? getAuth(app) : null;
+export const googleProvider = hasConfig ? new GoogleAuthProvider() : null;
 
 /**
- * Sign in using Google OAuth Popup
+ * Sign in using Google OAuth Popup.
  */
 export const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
-  } catch (error) {
-    console.error("Error signing in with Google:", error);
-    throw error;
+  if (!auth || !googleProvider) {
+    throw new Error('[YATRA] Firebase not configured — add VITE_FIREBASE_* vars to frontend/.env');
   }
+  const result = await signInWithPopup(auth, googleProvider);
+  return result.user;
 };
 
 /**
- * Log out the current user
+ * Log out the current user.
  */
 export const logoutUser = async () => {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    console.error("Error signing out:", error);
-    throw error;
-  }
+  if (!auth) return;
+  await signOut(auth);
 };

@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cinematic-950 text-gray-100 font-sans overflow-x-hidden min-h-screen antialiased;
+    background-color: #07070a;
+  }
+
+  /* Custom high-end scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(13, 13, 18, 0.5);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.6);
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  /* Luxury Glassmorphism Utilities */
+  .glass-card {
+    background: rgba(20, 20, 28, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-active {
+    background: rgba(20, 20, 28, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .glass-nav {
+    background: rgba(7, 7, 10, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Text Shimmer Effect */
+  .text-shimmer {
+    background: linear-gradient(
+      to right,
+      #9ca3af 20%,
+      #ffffff 30%,
+      #d4af37 70%,
+      #9ca3af 80%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shimmer 5s linear infinite;
+  }
+}
+
+/* Remove default Vite root constraints if any */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  border: none !important;
+  min-height: 100vh !important;
+}

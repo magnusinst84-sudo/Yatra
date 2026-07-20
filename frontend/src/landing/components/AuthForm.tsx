@@ -272,7 +272,7 @@ export const AuthForm = () => {
                     label="Email"
                     type="email"
                     id="signupEmail"
-                    placeholder="you@example.com"
+                    placeholder="you@gmail.com"
                     icon={<Mail className="w-4 h-4" />}
                     value={signupEmail}
                     onChange={(e) => setSignupEmail(e.target.value)}
@@ -313,7 +313,7 @@ export const AuthForm = () => {
                     label="Email"
                     type="email"
                     id="loginEmail"
-                    placeholder="you@example.com"
+                    placeholder="you@gmail.com"
                     icon={<Mail className="w-4 h-4" />}
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}

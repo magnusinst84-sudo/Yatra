@@ -249,7 +249,7 @@ export const AuthForm = () => {
                     label="First Name"
                     type="text"
                     id="firstName"
-                    placeholder="Saksham"
+                    placeholder="firstName"
                     icon={<User className="w-4 h-4" />}
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -259,7 +259,7 @@ export const AuthForm = () => {
                     label="Last Name"
                     type="text"
                     id="lastName"
-                    placeholder="Mittal"
+                    placeholder="lastName"
                     icon={<User className="w-4 h-4" />}
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}

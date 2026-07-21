@@ -155,7 +155,17 @@ async def start_walkthrough(req: StartRequest):
     state_dict = world_state.model_dump(mode="json")
 
     # 4. Save text-only state first so it's in DB even if image gen is slow
-    await save_walkthrough(state_dict)
+    from pymongo.errors import DuplicateKeyError
+    try:
+        await save_walkthrough(state_dict)
+    except DuplicateKeyError:
+        # A concurrent request already generated and saved the text for this place/era.
+        # Fetch their doc (even if incomplete, require_complete=False) so we can 
+        # return it and let the client poll their image generation progress.
+        existing = await find_walkthrough_by_place_era(req.place, req.era, require_complete=False)
+        if existing:
+            return existing
+        return state_dict
 
     # 5. Generate images for each stop and update DB
     for stop in state_dict["stops"]:
@@ -224,7 +234,11 @@ async def save_user_walkthrough(walkthrough_id: str, user=Depends(get_current_us
     # Clear any share_slug so the clone doesn't inherit a public link
     wt.pop("share_slug", None) 
     
-    await db_instance.walkthroughs.insert_one(wt)
+    from pymongo.errors import DuplicateKeyError
+    try:
+        await db_instance.walkthroughs.insert_one(wt)
+    except DuplicateKeyError:
+        raise HTTPException(status_code=400, detail="You have already saved a walkthrough for this place and era.")
 
     return {"status": "saved", "walkthrough_id": new_walkthrough_id}
 

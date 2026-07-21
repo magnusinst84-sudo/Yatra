@@ -71,11 +71,23 @@ async def update_share_slug(walkthrough_id: str, slug: str):
         {"$set": {"share_slug": slug}}
     )
 
-async def find_walkthrough_by_place_era(place: str, era: str) -> dict:
+async def find_walkthrough_by_place_era(place: str, era: str, require_complete: bool = True) -> dict:
     """Find a pre-generated walkthrough by place and era."""
     db = get_db()
     # Assuming pre-generated walkthroughs are marked with user_uid="system"
-    result = await db.walkthroughs.find_one({"place": place, "era": era, "user_uid": "system"})
-    if result:
-        result.pop("_id", None)
-    return result
+    # We use find() instead of find_one() here as a defensive cleanup measure. 
+    # Before the unique compound index on (place, era, user_uid) was added, 
+    # race conditions caused duplicate entries in the database. Iterating the cursor 
+    # allows us to safely bypass legacy incomplete duplicates rather than failing on them.
+    cursor = db.walkthroughs.find({"place": place, "era": era, "user_uid": "system"}).sort("created_at", -1)
+    async for result in cursor:
+        if not require_complete:
+            result.pop("_id", None)
+            return result
+            
+        all_generated = all(stop.get("generated") for stop in result.get("stops", []))
+        if all_generated:
+            result.pop("_id", None)
+            return result
+            
+    return None

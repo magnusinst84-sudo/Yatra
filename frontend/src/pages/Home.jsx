@@ -74,6 +74,25 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
 
+  const loadingTexts = [
+    "Gathering context...",
+    "Generating the first scene...",
+    "Consulting historical archives...",
+    "Assembling the timeline..."
+  ];
+  const [loadingTextIndex, setLoadingTextIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setLoadingTextIndex(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setLoadingTextIndex((prev) => (prev + 1) % loadingTexts.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
   // Local display states synced with fade transition
   const [displayEra, setDisplayEra] = useState(INITIAL_DESTINATIONS[0].era);
   const [displayName, setDisplayName] = useState(INITIAL_DESTINATIONS[0].name);
@@ -108,6 +127,20 @@ export default function Home() {
     setIsLoading(true);
     try {
       const result = await startWalkthrough(searchPlace.trim(), selectedEra, idToken);
+      setWalkthrough(result);
+    } catch (err) {
+      setSearchError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCardClick = async (dest, idx) => {
+    setActiveIndex(idx);
+    setSearchError(null);
+    setIsLoading(true);
+    try {
+      const result = await startWalkthrough(dest.name, dest.era, idToken);
       setWalkthrough(result);
     } catch (err) {
       setSearchError(err.message || 'Something went wrong. Please try again.');
@@ -197,7 +230,7 @@ export default function Home() {
                     type="text"
                     value={searchPlace}
                     onChange={(e) => setSearchPlace(e.target.value)}
-                    placeholder="e.g. Rome, Kyoto, Athens..."
+                    placeholder="e.g. Pune,Varanasi,Ayodhya..."
                     className="glass-input px-4 py-3 rounded text-sm text-white placeholder-white/35 focus:ring-1 focus:ring-antiqueGold"
                     required
                   />
@@ -256,7 +289,7 @@ export default function Home() {
                 return (
                   <div
                     key={dest.id}
-                    onClick={() => setActiveIndex(idx)}
+                    onClick={() => handleCardClick(dest, idx)}
                     className={`group relative rounded-lg cursor-pointer p-4 transition-all duration-500 flex items-center justify-between overflow-hidden border ${isActive
                       ? 'glass-card border-antiqueGold shadow-[0_0_20px_rgba(212,175,55,0.15)] translate-x-1'
                       : 'bg-white/[0.02] border-white/5 hover:border-white/20 hover:bg-white/[0.04]'
@@ -352,11 +385,12 @@ export default function Home() {
 
       {/* ── Loading Overlay ── */}
       {isLoading && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md animate-fade-in">
           <div className="glass-panel rounded-xl px-10 py-8 flex flex-col items-center gap-5 border border-antiqueGold/20 shadow-2xl">
-            <div className="w-10 h-10 border-2 border-antiqueGold border-t-transparent rounded-full animate-spin" />
-            <p className="font-body text-sm tracking-[0.2em] text-antiqueGold uppercase">Generating Walkthrough…</p>
-            <p className="font-body text-xs text-lightGray/60">Consulting historical archives for <span className="text-white">{searchPlace}</span></p>
+            <div className="w-12 h-12 border-2 border-antiqueGold border-t-transparent rounded-full animate-spin" />
+            <p className="font-body text-sm tracking-[0.2em] text-antiqueGold uppercase animate-pulse">
+              {loadingTexts[loadingTextIndex]}
+            </p>
           </div>
         </div>
       )}

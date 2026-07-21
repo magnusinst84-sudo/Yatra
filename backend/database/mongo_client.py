@@ -27,8 +27,8 @@ async def init_db():
     # 2. user_uid index for fast lookup of a user's saved walkthroughs
     await db.walkthroughs.create_index("user_uid")
     
-    # 3. Compound index on (place, era) to quickly find pre-generated walkthroughs
-    await db.walkthroughs.create_index([("place", 1), ("era", 1)])
+    # 3. Compound unique index on (place, era, user_uid) to prevent race condition duplicates
+    await db.walkthroughs.create_index([("place", 1), ("era", 1), ("user_uid", 1)], unique=True)
 
 async def close_db():
     global client

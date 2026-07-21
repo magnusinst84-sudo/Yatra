@@ -78,3 +78,4 @@ All routes mounted directly via `main.py`.
 2. **Deprecated Imagen models** — `imagen-4.0-fast-generate-001` and related tags are slated for deprecation in late 2026; migration to `imagen-3.0-generate-001` or native Gemini image paths is needed eventually.
 3. **No shared-link error UI** — a failed `/shared/[slug]` fetch only logs to console; there's no "Walkthrough Not Found" state for guests.
 4. **Base64 images stored in MongoDB** — Pollinations and placeholder images are saved as Base64 data URIs directly in documents, which bloats the DB. The intended fix (upload to Firebase Storage, store only the CDN URL) is stubbed but unimplemented.
+
